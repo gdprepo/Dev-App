@@ -1,0 +1,66 @@
+.imgProduct {
+    height: 90px;
+    width: auto;
+}
+
+.imgCategory {
+    height: 90px;
+    width: auto;
+    margin-left: 80%;
+    margin-top: -70px;
+}
+
+.imgCollection {
+    width: 40%;
+}
+
+.imgCommand {
+    height: 90px;
+    width: auto;
+    float: right;
+}
+
+.listCategories {
+    visibility: hidden;
+    height: 10px;
+}
+
+.loginstyle {
+    visibility: hidden;
+    height: 0px;
+}
+
+#list-command {
+    margin-top: 10%;
+}
+
+#sticky-footer {
+    background-color: white;
+    bottom: 0;
+    width: 100%;
+    position: relative;
+}
+
+.img_show{
+    margin-top: 50px;
+    width: 30%;
+    float: left;
+}
+
+.sign {
+    background-color: #3b4652;
+    opacity: .95;
+    color: white;
+}
+
+.mystyle{
+    background-color: beige;
+}
+
+header {
+    margin-bottom: 50px;
+}
+
+body {
+    background-image: url("https://cdn.hipwallpaper.com/i/18/93/Nyh4G6.jpg");
+}
