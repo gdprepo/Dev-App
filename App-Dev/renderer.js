@@ -118,8 +118,8 @@
     
     logout.click( function () {
         console.log("token")
+
         localStorage.removeItem("token")
-        window.location.href = "./login.html";
 
     })
 
