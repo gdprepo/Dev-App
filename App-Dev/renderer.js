@@ -70,11 +70,13 @@
     });
 
     if (localStorage.getItem("token")) {
-        ipcRenderer.send("setup", localStorage.getItem("token"))
+        ipcRenderer.send("setup", {token:localStorage.getItem("token"), user:JSON.parse(localStorage.getItem("user"))})
     }
 
-    ipcRenderer.on("user-authentify", (event, token) => {
-        localStorage.setItem("token", token);
+    ipcRenderer.on("user-authentify", (event, userObject) => {
+        localStorage.setItem("token", userObject.token);
+        localStorage.setItem("user", JSON.stringify(userObject.user));
+
         window.location.href = "./index.html";
     });    
 
@@ -104,25 +106,33 @@
 
     let loginDiv = document.getElementById("loginDiv")
     let logoutDiv = document.getElementById("logoutDiv")
+    let commandDiv = document.getElementById("commandDiv")
+
 
     if (localStorage.getItem("token")) {
         loginDiv.style.display = "none";
         logoutDiv.style.display = "block";
+        commandDiv.style.display = "block";
     } else {
         loginDiv.style.display = "block";
         logoutDiv.style.display = "none";
+        commandDiv.style.display = "none";
 
     }
 
     let logout = $('#logout')
     
     logout.click( function () {
-        console.log("token")
-
         localStorage.removeItem("token")
-
+        localStorage.removeItem("user")
     })
 
+    if (localStorage.getItem("user")) {
+        let user = JSON.parse(localStorage.getItem("user"))
+        let mailProfil = $('#profilEmail')
     
+        mailProfil.append(user.mail)
+    }
+
 
 })()

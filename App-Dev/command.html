@@ -22,7 +22,7 @@
   <body>
 
     <header>
-        <navbar class="navbar navbar-light bg-light">
+      <navbar class="navbar navbar-light bg-light">
             <a href="./index.html" style="width: 10%;" class="navbar-brand">
               <img src="./images/diapo.jpg" style="width: 50%;" class="rounded" alt="Cinque Terre">
               Dev
@@ -34,6 +34,22 @@
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
+
+                  <a class="top-right links" id="logoutDiv" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    ↓ Profil
+                  </a>
+
+                  <div class="collapse" id="collapseExample">
+                    <div id="logoutDiv" class="top-right links">
+                      <a id="profil" class="nav-link" href="./profil.html">Infomation</a>
+                    </div>
+                    <div id="logoutDiv" class="top-right links">
+                      <a id="logout" class="nav-link" href="">Logout</a>
+                    </div>
+                  </div>
+                  <div id="loginDiv" class="top-right links">
+                    <a class="nav-link" href="./login.html">Login</a>
+                  </div>
                   <li class="nav-item active">
                     <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
                   </li>

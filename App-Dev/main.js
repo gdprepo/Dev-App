@@ -6,6 +6,7 @@ let appState = {
     categoryList: [],
     win: undefined,
     token: undefined,
+    user : [],
 }
 
 function createWindow () {
@@ -36,9 +37,9 @@ function startApplication() {
       appState.win.webContents.send("got-product-list", appState.productList);
     });
 
-    axios.get('http://localhost:8000/api/command')
+    axios.get('http://localhost:8000/api/command', {params:{ token: appState.token}})
     .then(function (response) {
-      data=response.data.data
+      data=response.data.command
       appState.win.webContents.send("got-command-list", data);
     });
 
@@ -76,15 +77,19 @@ ipcMain.on('filter-product-by-category', (event, categoryList)=>{
 })
 
 ipcMain.on('setup', (event, data)=>{
-  appState.token = data
+  appState.token = data.token
+  appState.user = data.user
+
 })
 
 ipcMain.on('login-param', (event, data)=>{
 
   axios.post('http://localhost:8000/api/login', data)
   .then(function (response) {
+    appState.user = response.data.user
     appState.token = response.data.token
-    appState.win.webContents.send("user-authentify", appState.token);
+
+    appState.win.webContents.send("user-authentify", {user:appState.user, token: appState.token});
   });
 
 })
