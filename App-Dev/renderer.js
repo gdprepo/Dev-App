@@ -14,7 +14,7 @@
             let tableTr = $('<tr></tr>');
             list.append(tableTr)
             let tdTitle = $('<td scope=row></td>');
-            tdTitle.append(product.title)
+            tdTitle.append(product.title + ' ' + product.prix + ' €')
             tableTr.append(tdTitle)
             let tdDescription = $('<td scope=row></td>');
             tdDescription.append(product.description)
@@ -22,10 +22,17 @@
             let tdImage = $('<td scope=row></td>');
             tdImage.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgProduct" src="' + product.image + '"></img>' + '</a>')
             tableTr.append(tdImage)
+            let button = $('<td scope=row></td>');
+            button.append('<button type="button" class="btn btn-primary">Ajouter</button>')
+            button.click( function () {
+                ipcRenderer.send("add-product-to-cart", product)
+            })
+            tableTr.append(button)
         })
     });
 
     ipcRenderer.on("got-command-list", (event, commandList) => {
+
         let list = $('#list-command')
 
         commandList.forEach(function(command){
@@ -34,7 +41,7 @@
             let ulProduct = $('<ul class="list-group"></ul>')
             command.products.forEach(function(product) {
                 let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-                liProduct.append(product.title)
+                liProduct.append(product.title + " " + product.prix + " €")
                 liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCommand" src="'+ product.image  +'"></img>' + '</a>')
                 ulProduct.append(liProduct)
                 
@@ -78,7 +85,50 @@
         localStorage.setItem("user", JSON.stringify(userObject.user));
 
         window.location.href = "./index.html";
-    });    
+    });
+
+    if (localStorage.getItem("cart")) {
+        ipcRenderer.send("init-cart", JSON.parse(localStorage.getItem("cart")))
+    }
+    
+    ipcRenderer.on("update-cart", (event, cart) => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+        displayCart()
+    });
+
+    displayCart()
+
+
+    function displayCart() {
+        let listcart = $('#cart')
+        listcart.empty();
+
+        let cart = JSON.parse(localStorage.getItem("cart"))
+        if (cart) {
+            cart.product.forEach(function(product) {
+
+                let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+                liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCart" src="'+ product.image  +'"></img>' + '</a>')
+                liProduct.append(product.title + " " + product.prix + " €")
+                listcart.append(liProduct)
+                let button = $('<button type="button" class="btn btn-primary btn-cart">Supprimer</button>');
+                button.click( function () {
+                    ipcRenderer.send("remove-product-cart", product)
+                })
+                liProduct.append(button)
+                listcart.append(listcart)
+            })
+            let btnSendCart = $('<button type="button" class="btn btn-primary btn-cart">Enregistrer</button>');
+            btnSendCart.click( function () {
+                ipcRenderer.send("send-cart", cart);
+            })
+            listcart.append(btnSendCart)
+            
+        }
+
+    }
+
+
 
     let btnLogin = $('#loginbtn')
     btnLogin.click( function () {

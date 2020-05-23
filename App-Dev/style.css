@@ -20,6 +20,17 @@
     float: right;
 }
 
+.imgCart {
+    height: 80px;
+    width: auto;
+    margin-right: 5%;
+}
+
+.btn-cart {
+    float: right;
+    margin-top: 15px;
+}
+
 .listCategories {
     visibility: hidden;
     height: 10px;

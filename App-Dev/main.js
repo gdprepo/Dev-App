@@ -7,6 +7,9 @@ let appState = {
     win: undefined,
     token: undefined,
     user : [],
+    cart : {
+      product : [],
+    },
 }
 
 function createWindow () {
@@ -54,10 +57,36 @@ function startApplication() {
 
 }
 
+ipcMain.on('add-product-to-cart', (event, product)=>{
+
+  appState.cart.product.push(product)
+  appState.win.webContents.send("update-cart", appState.cart);
+})
+
+function findIndex(list, obj) {
+
+  for (var i=0; i<list.length; i++) {
+    if ( list[i].id == obj.id ) {
+      return i;
+    }
+  }
+
+}
+
+ipcMain.on('remove-product-cart', (event, product)=>{
+
+  appState.cart.product.splice(findIndex(appState.cart.product ,product), 1);
+
+  appState.win.webContents.send("update-cart", appState.cart);
+})
+
+ipcMain.on('init-cart', (event, cart)=>{
+  appState.cart = cart
+})
+
+
 ipcMain.on('filter-product-by-category', (event, categoryList)=>{
   let filterProduct = []
-
-  console.log(categoryList)
 
   if (categoryList.length == 0) {
     filterProduct = appState.productList;
@@ -94,6 +123,16 @@ ipcMain.on('login-param', (event, data)=>{
 
 })
 
+ipcMain.on('send-cart', (event, data) =>{
+  data.token = appState.token
+  axios.post('http://localhost:8000/api/validate-command', data)
+  .then(function (response) {
+    console.log(response)
+    appState.cart = { product : [] }
+    appState.win.webContents.send("update-cart", appState.cart);
+
+  });
+})
 
 
 app.whenReady().then(startApplication)
