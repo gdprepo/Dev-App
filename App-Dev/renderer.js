@@ -104,7 +104,8 @@
         listcart.empty();
 
         let cart = JSON.parse(localStorage.getItem("cart"))
-        if (cart) {
+        console.log(cart.product.length)
+        if (cart.product.length > 0) {
             cart.product.forEach(function(product) {
 
                 let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
@@ -116,19 +117,19 @@
                     ipcRenderer.send("remove-product-cart", product)
                 })
                 liProduct.append(button)
-                listcart.append(listcart)
+                //listcart.append(listcart)
             })
-            let btnSendCart = $('<button type="button" class="btn btn-primary btn-cart">Enregistrer</button>');
+            let liSend = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+            let btnSendCart = $('<button type="button" class="btn btn-primary">Enregistrer</button>');
             btnSendCart.click( function () {
                 ipcRenderer.send("send-cart", cart);
             })
-            listcart.append(btnSendCart)
-            
+            listcart.append(liSend)
+
+            liSend.append(btnSendCart)
         }
 
     }
-
-
 
     let btnLogin = $('#loginbtn')
     btnLogin.click( function () {
@@ -154,6 +155,15 @@
         }
     })
 
+    let logout = $('#logout')
+    
+    logout.click( function () {
+        console.log('coucou')
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
+        window.location.href = "./index.html"
+    })
+
     let loginDiv = document.getElementById("loginDiv")
     let logoutDiv = document.getElementById("logoutDiv")
     let commandDiv = document.getElementById("commandDiv")
@@ -169,13 +179,6 @@
         commandDiv.style.display = "none";
 
     }
-
-    let logout = $('#logout')
-    
-    logout.click( function () {
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
-    })
 
     if (localStorage.getItem("user")) {
         let user = JSON.parse(localStorage.getItem("user"))
