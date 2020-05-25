@@ -37,7 +37,8 @@
 
         commandList.forEach(function(command){
             let li = $('<li class="list-group-item"></li>');
-            li.append('<p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name + '</p>')
+            li.append('<p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name +'</p>')
+            li.append('<h6 class="font-weight-light text-right">' + command.date + '</h6>')
             let ulProduct = $('<ul class="list-group"></ul>')
             command.products.forEach(function(product) {
                 let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
