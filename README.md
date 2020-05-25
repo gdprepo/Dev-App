@@ -24,14 +24,11 @@ Ensuite utiliser la commande suivante dans le dossier
 
 * Voici les différentes parties du site
 
-![alt text](https://github.com/ "Logo Title Text 1")
+![alt text](https://github.com/wewlr17/Dev-App/blob/master/screen/accueil.png "Image accueil")
 
-![alt text](https://github.com/ "Logo Title Text 1")
+![alt text](https://github.com/wewlr17/Dev-App/blob/master/screen/listproducts.png "Image list produits")
 
-![alt text](https://github.com/ "Logo Title Text 1")
+![alt text](https://github.com/wewlr17/Dev-App/blob/master/screen/command.png "Image command")
 
-![alt text](https://github.com/ "Logo Title Text 1")
-
-![alt text](https://github.com/ "Logo Title Text 1")
 
 
