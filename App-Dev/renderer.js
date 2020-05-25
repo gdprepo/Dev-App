@@ -132,6 +132,17 @@
 
     }
 
+    if (localStorage.getItem("user")) {
+        let user = JSON.parse(localStorage.getItem("user"))
+        let mailProfil = $('#profilEmail')
+        let pseudo = $('#profilPseudo')
+
+    
+        mailProfil.append(user.mail)
+        pseudo.append(user.name)
+
+    }
+
     let btnLogin = $('#loginbtn')
     btnLogin.click( function () {
 
@@ -159,7 +170,6 @@
     let logout = $('#logout')
     
     logout.click( function () {
-        console.log('coucou')
         localStorage.removeItem("token")
         localStorage.removeItem("user")
         window.location.href = "./index.html"
@@ -179,13 +189,6 @@
         logoutDiv.style.display = "none";
         commandDiv.style.display = "none";
 
-    }
-
-    if (localStorage.getItem("user")) {
-        let user = JSON.parse(localStorage.getItem("user"))
-        let mailProfil = $('#profilEmail')
-    
-        mailProfil.append(user.mail)
     }
 
 
