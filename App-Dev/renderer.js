@@ -135,6 +135,9 @@
         let user = JSON.parse(localStorage.getItem("user"))
         let mailProfil = $('#profilEmail')
         let pseudo = $('#profilPseudo')
+        let image = $('#profilImg')
+        
+        image.append('<img style="width: 50%;" class="rounded" src="'+ user.image  +'"></img>')
 
     
         mailProfil.append(user.mail)
