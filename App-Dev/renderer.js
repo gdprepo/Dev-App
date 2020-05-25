@@ -31,26 +31,26 @@
         })
     });
 
-    ipcRenderer.on("got-command-list", (event, commandList) => {
+    // ipcRenderer.on("got-command-list", (event, commandList) => {
 
-        let list = $('#list-command')
+    //     let list = $('#list-command')
 
-        commandList.forEach(function(command){
-            let li = $('<li class="list-group-item"></li>');
-            li.append('<p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name +'</p>')
-            li.append('<h6 class="font-weight-light text-right">' + command.date + '</h6>')
-            let ulProduct = $('<ul class="list-group"></ul>')
-            command.products.forEach(function(product) {
-                let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-                liProduct.append(product.title + " " + product.prix + " €")
-                liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCommand" src="'+ product.image  +'"></img>' + '</a>')
-                ulProduct.append(liProduct)
+    //     commandList.forEach(function(command){
+    //         let li = $('<li class="list-group-item"></li>');
+    //         li.append('<p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name +'</p>')
+    //         li.append('<h6 class="font-weight-light text-right">' + command.date + '</h6>')
+    //         let ulProduct = $('<ul class="list-group"></ul>')
+    //         command.products.forEach(function(product) {
+    //             let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+    //             liProduct.append(product.title + " " + product.prix + " €")
+    //             liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCommand" src="'+ product.image  +'"></img>' + '</a>')
+    //             ulProduct.append(liProduct)
                 
-            })
-            li.append(ulProduct)
-            list.append(li)
-        })
-    });
+    //         })
+    //         li.append(ulProduct)
+    //         list.append(li)
+    //     })
+    // });
 
     ipcRenderer.on("got-category-list", (event, categoryList) => {
         let list = $('#list-category')
@@ -97,40 +97,39 @@
         displayCart()
     });
 
-    displayCart()
+    // displayCart()
 
+    // function displayCart() {
+    //     let listcart = $('#cart')
+    //     listcart.empty();
 
-    function displayCart() {
-        let listcart = $('#cart')
-        listcart.empty();
+    //     let cart = JSON.parse(localStorage.getItem("cart"))
+    //     console.log(cart.product.length)
+    //     if (cart.product.length > 0) {
+    //         cart.product.forEach(function(product) {
 
-        let cart = JSON.parse(localStorage.getItem("cart"))
-        console.log(cart.product.length)
-        if (cart.product.length > 0) {
-            cart.product.forEach(function(product) {
+    //             let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+    //             liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCart" src="'+ product.image  +'"></img>' + '</a>')
+    //             liProduct.append(product.title + " " + product.prix + " €")
+    //             listcart.append(liProduct)
+    //             let button = $('<button type="button" class="btn btn-primary btn-cart">Supprimer</button>');
+    //             button.click( function () {
+    //                 ipcRenderer.send("remove-product-cart", product)
+    //             })
+    //             liProduct.append(button)
+    //             //listcart.append(listcart)
+    //         })
+    //         let liSend = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+    //         let btnSendCart = $('<button type="button" class="btn btn-primary">Enregistrer</button>');
+    //         btnSendCart.click( function () {
+    //             ipcRenderer.send("send-cart", cart);
+    //         })
+    //         listcart.append(liSend)
 
-                let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-                liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCart" src="'+ product.image  +'"></img>' + '</a>')
-                liProduct.append(product.title + " " + product.prix + " €")
-                listcart.append(liProduct)
-                let button = $('<button type="button" class="btn btn-primary btn-cart">Supprimer</button>');
-                button.click( function () {
-                    ipcRenderer.send("remove-product-cart", product)
-                })
-                liProduct.append(button)
-                //listcart.append(listcart)
-            })
-            let liSend = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-            let btnSendCart = $('<button type="button" class="btn btn-primary">Enregistrer</button>');
-            btnSendCart.click( function () {
-                ipcRenderer.send("send-cart", cart);
-            })
-            listcart.append(liSend)
+    //         liSend.append(btnSendCart)
+    //     }
 
-            liSend.append(btnSendCart)
-        }
-
-    }
+    // }
 
     if (localStorage.getItem("user")) {
         let user = JSON.parse(localStorage.getItem("user"))
@@ -143,19 +142,6 @@
 
     }
 
-    let btnLogin = $('#loginbtn')
-    btnLogin.click( function () {
-
-        var data = {
-            mail : $('#inputmail').val(),
-            password : $('#inputpassword').val(),
-        }
-
-        console.log(data)
-        
-        ipcRenderer.send("login-param", data);
-    })
-
     let showList = $('#showCategorie')
     showList.click( function () {
         let element = document.getElementById("listShow");
@@ -166,6 +152,20 @@
 
         }
     })
+
+    // let btnLogin = $('#loginbtn')
+
+    // btnLogin.click( function () {
+
+    //     var data = {
+    //         mail : $('#inputmail').val(),
+    //         password : $('#inputpassword').val(),
+    //     }
+
+    //     console.log(data)
+        
+    //     ipcRenderer.send("login-param", data);
+    // }) 
 
     let logout = $('#logout')
     
@@ -190,6 +190,5 @@
         commandDiv.style.display = "none";
 
     }
-
 
 })()

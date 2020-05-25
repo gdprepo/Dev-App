@@ -94,7 +94,7 @@ ipcMain.on('filter-product-by-category', (event, categoryList)=>{
     appState.productList.forEach( (product) => {
       product.categories.forEach( function (productCategory) {
         categoryList.forEach(function (category) {
-          if (productCategory.id == category.id) {
+          if (productCategory.id == category.id && filterProduct.indexOf(product) == -1) {
             filterProduct.push(product);
           }
         })

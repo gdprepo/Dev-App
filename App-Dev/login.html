@@ -13,19 +13,21 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+    />
 
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vuex"></script>
-
-
 
 </head>
   <body>
 
     <header>
-        <navbar class="navbar navbar-light bg-light">
-            <a href="./index.html" style="width: 10%;" class="navbar-brand">
-              <img src="./images/diapo.jpg" style="width: 50%;" class="rounded" alt="Cinque Terre">
+      <navbar class="navbar navbar-light bg-light">
+            <a href="./index.html" style="width: 10%;" class="navbar-brand animate__animated animate__fadeInDown">
+              <img src="./images/logo.png" style="width: 35%;" class="rounded" alt="Cinque Terre">
               Dev
             </a>
 
@@ -35,11 +37,21 @@
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
+
+                  <a class="top-right links" style="display: none;" id="logoutDiv" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    ↓ Profil
+                  </a>
+
+                  <div class="collapse" id="collapseExample">
+                    <div class="top-right links">
+                      <a id="profil" class="nav-link" href="./profil.html">Infomation</a>
+                    </div>
+                    <div class="top-right links">
+                      <a id="logout" class="nav-link" href="">Logout</a>
+                    </div>
+                  </div>
                   <div id="loginDiv" class="top-right links">
                     <a class="nav-link" href="./login.html">Login</a>
-                  </div>
-                  <div id="logoutDiv" class="top-right links">
-                    <a id="logout" class="nav-link" href="">Logout</a>
                   </div>
                   <li class="nav-item active">
                     <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
@@ -47,7 +59,7 @@
                   <li class="nav-item">
                     <a class="nav-link" href="./products.html">Products</a>
                   </li>
-                  <li class="nav-item">
+                  <li id="commandDiv"  class="nav-item">
                     <a class="nav-link" href="./command.html">Command</a>
                   </li>
                   <li class="nav-item">
@@ -71,13 +83,16 @@
                             <input class="form-control rounded-pill form-control-lg" id="inputpassword" text="password" placeholder="Entrer un password"></input>
                         </div>
 
-                        <button style="width: 100%;" id="loginbtn" onclick="" class="btn btn-primary" type="submit">valider</button>
+                        <button style="width: 100%;" id="loginbtn" class="btn btn-primary" type="submit">valider</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="./login.js"></script>
+
     <script src="./renderer.js"></script>
+
   </body>
 </html>

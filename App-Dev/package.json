@@ -12,6 +12,7 @@
     "electron": "^8.2.5"
   },
   "dependencies": {
+    "animate.css": "^4.1.0",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "jquery": "^3.5.1",
