@@ -16,9 +16,21 @@
             mail : $('#inputmail').val(),
             password : $('#inputpassword').val(),
         }
-        
-        ipcRenderer.send("login-param", data);
-    }) 
+        if (data.mail && data.password) {
+            ipcRenderer.send("login-param", data);
+        } else {
+            let element = document.getElementById("erreur");
+
+            element.style.display = "block";
+        }
+    })
+
+    ipcRenderer.on("update-authentify", (event) => {
+        console.log("coucou")
+        let element = document.getElementById("erreur");
+
+        element.style.display = "block";
+    })
 
 
 

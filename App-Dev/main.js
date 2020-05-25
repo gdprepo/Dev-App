@@ -115,10 +115,15 @@ ipcMain.on('login-param', (event, data)=>{
 
   axios.post('http://localhost:8000/api/login', data)
   .then(function (response) {
-    appState.user = response.data.user
-    appState.token = response.data.token
+//    console.log(response.da)
+    if (response.data.success) {
+      appState.user = response.data.user
+      appState.token = response.data.token
 
-    appState.win.webContents.send("user-authentify", {user:appState.user, token: appState.token});
+      appState.win.webContents.send("user-authentify", {user:appState.user, token: appState.token});
+    } else {
+      appState.win.webContents.send("update-authentify");
+    }
   });
 
 })
