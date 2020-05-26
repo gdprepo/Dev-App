@@ -9,9 +9,12 @@
     ipcRenderer.on("got-command-list", (event, commandList) => {
 
         let list = $('#list-command')
+        let name = ""
+        let total = 0
 
         commandList.forEach(function(command){
-            let total = 0;
+            name = command.user.name
+            total = 0
             let li = $('<li class="list-group-item"></li>');
             li.append('<p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name +'</p>')
             li.append('<h6 class="font-weight-light text-right">' + command.date + '</h6>')
@@ -29,6 +32,27 @@
             liPrix.append( 'Le prix de total de votre commande est de : ' + total + '€')
             list.append(liPrix)
         })
+        let confirmer = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+        let btnconfirmer = $('<button style="width:100%" type="button" class="btn btn-primary">Confirmer</button>');
+        btnconfirmer.click( function () {
+            var data = {
+                token : localStorage.getItem('token'),
+                total : total,
+            }
+            ipcRenderer.send("confirmer-command", data)
+        })
+        confirmer.append(btnconfirmer)
+        list.append(confirmer)
+
+    });
+
+    // if (localStorage.getItem("cart")) {
+    //     ipcRenderer.send("init-cart", JSON.parse(localStorage.getItem("cart")))
+    // }
+    
+    ipcRenderer.on("update-cart", (event, cart) => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+        displayCart()
     });
 
     if (localStorage.getItem("cart")) {

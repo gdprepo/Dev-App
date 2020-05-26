@@ -119,7 +119,6 @@
     
     ipcRenderer.on("update-cart", (event, cart) => {
         localStorage.setItem("cart", JSON.stringify(cart));
-        displayCart()
     });
 
     // displayCart()

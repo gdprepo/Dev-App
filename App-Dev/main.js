@@ -128,6 +128,23 @@ ipcMain.on('login-param', (event, data)=>{
 
 })
 
+ipcMain.on('confirmer-command', (event, data)=>{
+
+  axios.post('http://localhost:8000/api/confirmer-command', data)
+  .then(function (response) {
+   console.log(response.data)
+    if (response.data.success) {
+      let check = response.data.success
+
+    //  appState.win.webContents.send("user-authentify", {success:check});
+    } else {
+     // appState.win.webContents.send("update-authentify");
+    }
+  });
+
+})
+
+
 ipcMain.on('contact-param', (event, data)=>{
 
   axios.post('http://localhost:8000/api/contact', data)
@@ -151,7 +168,6 @@ ipcMain.on('send-cart', (event, data) =>{
     console.log(response)
     appState.cart = { product : [] }
     appState.win.webContents.send("update-cart", appState.cart);
-
   });
 })
 
