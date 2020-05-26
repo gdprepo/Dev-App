@@ -22,9 +22,9 @@
   <body>
 
     <header>
-        <navbar class="navbar navbar-light bg-light">
-            <a href="./index.html" style="width: 10%;" class="navbar-brand">
-              <img src="./images/diapo.jpg" style="width: 50%;" class="rounded" alt="Cinque Terre">
+      <navbar class="navbar navbar-light bg-light">
+            <a href="./index.html" style="width: 10%;" class="navbar-brand animate__animated animate__fadeInDown">
+              <img src="./images/logo.png" style="width: 35%;" class="rounded" alt="Cinque Terre">
               Dev
             </a>
 
@@ -34,13 +34,29 @@
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
+
+                  <a class="top-right links" style="display: none;" id="logoutDiv" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    ↓ Profil
+                  </a>
+
+                  <div class="collapse" id="collapseExample">
+                    <div class="top-right links">
+                      <a id="profil" class="nav-link" href="./profil.html">Infomation</a>
+                    </div>
+                    <div class="top-right links">
+                      <a id="logout" class="nav-link" href="">Logout</a>
+                    </div>
+                  </div>
+                  <div id="loginDiv" class="top-right links">
+                    <a class="nav-link" href="./login.html">Login</a>
+                  </div>
                   <li class="nav-item active">
                     <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="./products.html">Products</a>
                   </li>
-                  <li class="nav-item">
+                  <li id="commandDiv"  class="nav-item">
                     <a class="nav-link" href="./command.html">Command</a>
                   </li>
                   <li class="nav-item">
@@ -53,15 +69,33 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-align">
-                
-            </div>
-        
-        </div>
+      <div style="margin-bottom: 50px" class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card sign">
+                    <div class="card-header">CONTACT</div>
+                    <div id="erreur" style="margin: 10px; display: none;" class="alert alert-danger animate__animated animate__fadeInDown" role="alert">
+                      Verifier l'email et le message
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input class="form-control rounded-pill form-control-lg" id="inputmail" text="mail" placeholder="Entrer une adresse email" ></input>
+                        </div>
+                        <div class="form-group">
+                            
+                            <div class="input-group">
+                              <textarea id="inputmessage" text="text" class="form-control rounded-pill" placeholder="Entrer un message" aria-label="With textarea"></textarea>
+                            </div>
+                        
+                        </div>
 
-      
+                        <button style="width: 100%;" id="contactbtn" class="btn btn-primary" type="submit">valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script src="./js/contact.js"></script>
 
     <script src="./renderer.js"></script>
   </body>

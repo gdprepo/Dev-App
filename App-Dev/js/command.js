@@ -11,6 +11,7 @@
         let list = $('#list-command')
 
         commandList.forEach(function(command){
+            let total = 0;
             let li = $('<li class="list-group-item"></li>');
             li.append('<p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name +'</p>')
             li.append('<h6 class="font-weight-light text-right">' + command.date + '</h6>')
@@ -20,10 +21,13 @@
                 liProduct.append(product.title + " " + product.prix + " €")
                 liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCommand" src="'+ product.image  +'"></img>' + '</a>')
                 ulProduct.append(liProduct)
-                
+                total += parseInt(product.prix)
             })
             li.append(ulProduct)
             list.append(li)
+            let liPrix = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+            liPrix.append( 'Le prix de total de votre commande est de : ' + total + '€')
+            list.append(liPrix)
         })
     });
 
@@ -49,7 +53,6 @@
                     ipcRenderer.send("remove-product-cart", product)
                 })
                 liProduct.append(button)
-                //listcart.append(listcart)
             })
             let liSend = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
             let btnSendCart = $('<button type="button" class="btn btn-primary">Enregistrer</button>');

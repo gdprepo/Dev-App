@@ -128,6 +128,22 @@ ipcMain.on('login-param', (event, data)=>{
 
 })
 
+ipcMain.on('contact-param', (event, data)=>{
+
+  axios.post('http://localhost:8000/api/contact', data)
+  .then(function (response) {
+   console.log(response.data.success)
+    if (response.data.success) {
+      let check = response.data.success
+
+    //  appState.win.webContents.send("user-authentify", {success:check});
+    } else {
+     // appState.win.webContents.send("update-authentify");
+    }
+  });
+
+})
+
 ipcMain.on('send-cart', (event, data) =>{
   data.token = appState.token
   axios.post('http://localhost:8000/api/validate-command', data)

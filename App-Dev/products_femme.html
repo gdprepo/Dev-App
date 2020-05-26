@@ -23,46 +23,65 @@
   <body>
 
     <header>
-        <navbar class="navbar navbar-light bg-light">
-            <div class="top-right links">
-                <a href="./index.html" class="navbar-brand">Products</a>
-            </div>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <navbar class="navbar navbar-light bg-light">
+            <a href="./index.html" style="width: 10%;" class="navbar-brand animate__animated animate__fadeInDown">
+              <img src="./images/logo.png" style="width: 35%;" class="rounded" alt="Cinque Terre">
+              Dev
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
+
+                  <a class="top-right links" style="display: none;" id="logoutDiv" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    ↓ Profil
+                  </a>
+
+                  <div class="collapse" id="collapseExample">
+                    <div class="top-right links">
+                      <a id="profil" class="nav-link" href="./profil.html">Infomation</a>
+                    </div>
+                    <div class="top-right links">
+                      <a id="logout" class="nav-link" href="">Logout</a>
+                    </div>
+                  </div>
+                  <div id="loginDiv" class="top-right links">
+                    <a class="nav-link" href="./login.html">Login</a>
+                  </div>
                   <li class="nav-item active">
                     <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="./products.html">Products</a>
                   </li>
-                  <li class="nav-item">
+                  <li id="commandDiv"  class="nav-item">
                     <a class="nav-link" href="./command.html">Command</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./contact.html">Contact</a>
+                  </li>
                 </ul>
-                <form class="form-inline mt-2 mt-md-0">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
         </navbar>
     </header>
 
 
     <div class="container">
-      <table class="table">
+      <table style="background-color: white;" class="table">
         <thead>
           <tr>
             <th scope="row">Titre</th>  
             <th scope="row">Description</th>
             <th scope="row">Image</th>
+            <th scope="row">Action</th>
+
           </tr>  
           
         </thead>
-        <tbody id="list">
+        <tbody id="listProductFemme">
           
         </tbody>
 
@@ -70,6 +89,7 @@
       
     </div>
 
+    <script src="./js/listProductFemme.js"></script>
     <script src="./renderer.js"></script>
   </body>
 </html>
