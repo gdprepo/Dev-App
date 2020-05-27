@@ -5,6 +5,36 @@
     const { ipcRenderer } = electron
     window.$ = window.jQuery = require('jquery');
 
+    const categoryFilter = []
+
+    ipcRenderer.on("got-category-list", (event, categoryList) => {
+        let list = $('#list-category')
+        categoryList.forEach(function(category){
+            if (category.title != "Femme" && category.title != "Homme") {
+                let li = $('<li class="list-group-item" id= "category'+  category.id  +'"></li>');
+                li.append('<p style="margin-top: 35px">'+ category.title +'</p>')
+                li.append('<img class="imgCategory img-thumbnail" src="'+ category.image  +'"></img>')
+                list.append(li)
+                li.click( function () {
+                    if  ( categoryFilter.indexOf(category) !== -1) {
+                        categoryFilter.splice(categoryFilter.indexOf(category), 1);
+                    } else {
+                        categoryFilter.push(category);
+                    }
+                    ipcRenderer.send("filter-product-by-category", categoryFilter)
+                    var element = document.getElementById("category" + category.id);
+                    if (element.classList == "list-group-item mystyle") {
+                        element.classList.remove("mystyle");
+                    } else {
+                        element.classList.add("mystyle");          
+                    }
+
+                })
+            }
+        })
+    });
+
+
     ipcRenderer.on("got-product-list", (event, productList) => {
         let list = $('#listProductHomme')
         list.empty();

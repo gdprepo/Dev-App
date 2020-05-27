@@ -20,7 +20,7 @@
 
         }
         console.log(data)
-        if (data.mail && data.password) {
+        if (data.mail && data.password && data.mail && data.password && data.image) {
             ipcRenderer.send("register-param", data);
         } else {
             let element = document.getElementById("erreur");

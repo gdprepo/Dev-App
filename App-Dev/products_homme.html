@@ -16,6 +16,10 @@
 
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vuex"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+    />
 
 
 
@@ -68,9 +72,18 @@
         </navbar>
     </header>
 
+    <button type="button" style="margin-bottom: 10px; width: 94%;" id="showCategorie" class="container btn btn-primary btn-lg btn-block animate__animated animate__fadeInDown">Voir les categories</button>
+    <div id="listShow" style="display: none;" class="container-fluid animate__animated animate__fadeInRight">
+    
+      <ul style="margin-right: 5%;" id="list-category">
+          
+      </ul>
+
+    </div>
+
 
     <div class="container">
-      <table style="background-color: white;" class="table">
+      <table style="background-color: white;" class="table animate__animated animate__fadeInUp">
         <thead>
           <tr>
             <th scope="row">Titre</th>  

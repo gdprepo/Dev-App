@@ -49,27 +49,36 @@
 
     ipcRenderer.on(systemEvents.EVENT_FETCHED_CATEGORIES, (event, categoryList) => {
         let list = $('#list-category')
-        categoryList.forEach(function(category){
-            let li = $('<li class="list-group-item" id= "category'+  category.id  +'"></li>');
-            li.append('<p style="margin-top: 35px">'+ category.title +'</p>')
-            li.append('<img class="imgCategory img-thumbnail" src="'+ category.image  +'"></img>')
-            list.append(li)
-            li.click( function () {
-                if  ( categoryFilter.indexOf(category) !== -1) {
-                    categoryFilter.splice(categoryFilter.indexOf(category), 1);
-                } else {
-                    categoryFilter.push(category);
-                }
-                ipcRenderer.send(displayEvents.EVENT_PRODUCT_FILTERED_BY_CATEGORY, categoryFilter)
-                var element = document.getElementById("category" + category.id);
-                if (element.classList == "list-group-item mystyle") {
-                    element.classList.remove("mystyle");
-                } else {
-                    element.classList.add("mystyle");          
-                }
+        var nom = window.location.pathname;
+        nom = nom.split("/");
+        nom = nom[nom.length - 1];
+        nom = nom.substr(0, nom.lastIndexOf("."));
+        nom = nom.replace(new RegExp("(%20|_|-)", "g"), "");
 
+        if (nom != "productshomme" && nom != "productsfemme") {
+            categoryList.forEach(function(category){
+                let li = $('<li class="list-group-item" id= "category'+  category.id  +'"></li>');
+                li.append('<p style="margin-top: 35px">'+ category.title +'</p>')
+                li.append('<img class="imgCategory img-thumbnail" src="'+ category.image  +'"></img>')
+                list.append(li)
+                li.click( function () {
+                    if  ( categoryFilter.indexOf(category) !== -1) {
+                        categoryFilter.splice(categoryFilter.indexOf(category), 1);
+                    } else {
+                        categoryFilter.push(category);
+                    }
+                    ipcRenderer.send(displayEvents.EVENT_PRODUCT_FILTERED_BY_CATEGORY, categoryFilter)
+                    var element = document.getElementById("category" + category.id);
+                    if (element.classList == "list-group-item mystyle") {
+                        element.classList.remove("mystyle");
+                    } else {
+                        element.classList.add("mystyle");          
+                    }
+    
+                })
             })
-        })
+
+        }
     });
 
     if (localStorage.getItem("token")) {
