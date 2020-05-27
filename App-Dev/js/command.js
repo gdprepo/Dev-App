@@ -5,32 +5,58 @@
     const { ipcRenderer } = electron
     window.$ = window.jQuery = require('jquery');
 
+    function createRowForCommand(command)
+    {
+        let li = $('<li class="list-group-item"></li>');
+
+        const liData = [
+            '<p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name +'</p>',
+            '<h6 class="font-weight-light text-right">' + command.date + '</h6>',
+        ]
+        refreshList(li, liData)
+        
+        return li
+    }
+
+    function createRowForProduct(product)
+    {
+        
+        let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+
+        const liData = [
+            product.title + " " + product.prix + " €",
+            '<a href="./product/' + product.id +'_product.html">' + '<img class="imgCommand" src="'+ product.image  +'"></img>' + '</a>',
+        ]
+
+        refreshList(liProduct, liData)
+
+
+        return liData
+    }
 
     ipcRenderer.on("got-command-list", (event, commandList) => {
-
-        let list = $('#list-command')
-        let name = ""
-        let total = 0
+        let rows = []
 
         commandList.forEach(function(command){
-            name = command.user.name
-            total = 0
-            let li = $('<li class="list-group-item"></li>');
-            li.append('<p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name +'</p>')
-            li.append('<h6 class="font-weight-light text-right">' + command.date + '</h6>')
-            let ulProduct = $('<ul class="list-group"></ul>')
+            let productRows = []
+            let name = command.user.name
+            let total = 0
+
+            let row = createRowForCommand(command)
             command.products.forEach(function(product) {
-                let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-                liProduct.append(product.title + " " + product.prix + " €")
-                liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCommand" src="'+ product.image  +'"></img>' + '</a>')
-                ulProduct.append(liProduct)
+                let productRow = createRowForProduct(product)
+                productRows.push(productRow)
                 total += parseInt(product.prix)
             })
-            li.append(ulProduct)
-            list.append(li)
+
+            let ulProduct = $('<ul class="list-group"></ul>')
+            refreshList(ulProduct, productRows)
+
+            row.append(ulProduct)
+            rows.push(row)
             let liPrix = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
             liPrix.append( 'Le prix de total de votre commande est de : ' + total + '€')
-            list.append(liPrix)
+            rows.push(liPrix)
         })
         let confirmer = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
         let btnconfirmer = $('<button style="width:100%" type="button" class="btn btn-primary">Confirmer</button>');
@@ -42,7 +68,10 @@
             ipcRenderer.send("confirmer-command", data)
         })
         confirmer.append(btnconfirmer)
-        list.append(confirmer)
+        rows.push(confirmer)
+
+        let list = $('#list-command')
+        refreshList(list, rows);
 
     });
 

@@ -8,7 +8,7 @@
 
 
 
-    let btnLogin = $('#loginbtn')
+    let btnLogin = $('#registerbtn')
 
     btnLogin.click( function () {
 
@@ -16,9 +16,10 @@
             name : $('#inputname').val(),
             mail : $('#inputmail').val(),
             password : $('#inputpassword').val(),
-            password : $('#inputimage').val(),
+            image : $('#inputimage').val(),
 
         }
+        console.log(data)
         if (data.mail && data.password) {
             ipcRenderer.send("register-param", data);
         } else {
