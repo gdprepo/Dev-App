@@ -149,7 +149,7 @@ ipcMain.on('contact-param', (event, data)=>{
 
   axios.post('http://localhost:8000/api/contact', data)
   .then(function (response) {
-   console.log(response.data.success)
+   console.log(response.data)
     if (response.data.success) {
       let check = response.data.success
 

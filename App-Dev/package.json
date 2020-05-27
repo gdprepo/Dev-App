@@ -16,7 +16,9 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "jquery": "^3.5.1",
+    "nodemailer": "^0.7.1",
     "request": "^2.88.2",
+    "sendmail": "^1.6.1",
     "tether": "^1.4.7"
   }
 }

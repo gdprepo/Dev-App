@@ -25,10 +25,10 @@
   <body>
 
     <header>
-        <navbar class="navbar navbar-light bg-light">
+      <navbar class="navbar navbar-light bg-light">
             <a href="./index.html" style="width: 10%;" class="navbar-brand animate__animated animate__fadeInDown">
               <img src="./images/logo.png" style="width: 35%;" class="rounded" alt="Cinque Terre">
-              C & S
+              Dev
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,69 +70,38 @@
         </navbar>
     </header>
 
-
-    <div class="container">
-
-      <div id="carouselExampleIndicators" class="carousel slide animate__animated animate__backInDown" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img style="height:400px" class="d-block w-100" src="./images/diapo.jpg" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img style="height:400px" class="d-block w-100" src="./images/diapo2.jpg" alt="Second slide">
-          </div>
-          <div class="carousel-item">
-            <img style="height:400px" class="d-block w-100" src="./images/diapo3.jpg" alt="Third slide">
-          </div>
+    <div class="container ">
+        <div style="margin-bottom: 50px" class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card sign">
+                    <div class="card-header">Login</div>
+                    <div id="erreur" style="margin: 10px; display: none;" class="alert alert-danger animate__animated animate__fadeInDown" role="alert">
+                      Verifier l'email et le password
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input class="form-control rounded-pill form-control-lg" id="inputname" text="mail" placeholder="Entrer un pseudo" ></input>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control rounded-pill form-control-lg" id="inputmail" text="mail" placeholder="Entrer une adresse email" ></input>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control rounded-pill form-control-lg" id="inputpassword" text="password" placeholder="Entrer un password"></input>
+                        </div>
+                        <div class="form-group">
+                          <label>Image : </label>
+                          <input class="form-control" type="text" name="image" id="inputimage" placeholder="Lien pour l'image du profile">
+                      </div>
+                        <button style="width: 100%;" id="loginbtn" class="btn btn-primary" type="submit">valider</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-
-      <hr>
-
-      <div class="text animate__animated animate__backInDown" style="background-color: rgba(97, 97, 97, 0.5)">
-        <h2 style="margin-bottom: 50px; text-align: center; font-size: 50px;">Collection</h2>
-      </div>
-
-      <div style="margin-bottom: 100px;" class="row animate__animated animate__bounceInRight">
-        <div class="col">
-          <a href="./products_femme.html">
-            <img src="./images/femme.jpg" class="rounded mx-auto  imgCollection" alt="..."></img>
-          </a>
-        </div>
-        <div class="col">
-          <a href="./products_homme.html">
-            <img src="./images/homme.jpg" class="rounded mx-auto imgCollection" alt="..."></img>
-          </a>
-        </div>
-      </div>
-
-
-
-
-      
     </div>
 
-    <footer id="sticky-footer" class="py-4 text-white-50 fixed-bottom">
-    <div class="container text-center">
-      <small>Bienvenue sur le site &copy; ClothinShop</small>
-      <p class="float-right"><a href="#">Back to top </a></p>
-    </div>
-  </footer>
+    <script src="./js/register.js"></script>
 
     <script src="./renderer.js"></script>
-  </body>
 
+  </body>
 </html>
