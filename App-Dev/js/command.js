@@ -58,17 +58,17 @@
             liPrix.append( 'Le prix de total de votre commande est de : ' + total + '€')
             rows.push(liPrix)
         })
-        let confirmer = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-        let btnconfirmer = $('<button style="width:100%" type="button" class="btn btn-primary">Confirmer</button>');
-        btnconfirmer.click( function () {
-            var data = {
-                token : localStorage.getItem('token'),
-                total : total,
-            }
-            ipcRenderer.send("confirmer-command", data)
-        })
-        confirmer.append(btnconfirmer)
-        rows.push(confirmer)
+        // let confirmer = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+        // let btnconfirmer = $('<button style="width:100%" type="button" class="btn btn-primary">Confirmer</button>');
+        // btnconfirmer.click( function () {
+        //     var data = {
+        //         token : localStorage.getItem('token'),
+        //         total : total,
+        //     }
+        //     ipcRenderer.send("confirmer-command", data)
+        // })
+        // confirmer.append(btnconfirmer)
+        // rows.push(confirmer)
 
         let list = $('#list-command')
         refreshList(list, rows);
@@ -95,22 +95,33 @@
         let cart = JSON.parse(localStorage.getItem("cart"))
 
         if (cart.product.length > 0) {
+            let total = 0
             cart.product.forEach(function(product) {
 
                 let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
                 liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCart" src="'+ product.image  +'"></img>' + '</a>')
                 liProduct.append(product.title + " " + product.prix + " €")
                 listcart.append(liProduct)
-                let button = $('<button type="button" class="btn btn-primary btn-cart">Supprimer</button>');
+                let button = $('<button id="add_product" type="button" class="btn btn-primary btn-cart">Supprimer</button>');
                 button.click( function () {
                     ipcRenderer.send("remove-product-cart", product)
                 })
                 liProduct.append(button)
+                total += parseInt(product.prix)
             })
+            let liPrix = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+            liPrix.append( 'Le prix de total de votre commande est de : ' + total + '€')
+            listcart.append(liPrix)
+
             let liSend = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-            let btnSendCart = $('<button type="button" class="btn btn-primary">Enregistrer</button>');
+            let btnSendCart = $('<button style="width:100%" type="button" class="btn btn-primary">Enregistrer</button>');
             btnSendCart.click( function () {
                 ipcRenderer.send("send-cart", cart);
+                var data = {
+                    token : localStorage.getItem('token'),
+                    total : total,
+                }
+                ipcRenderer.send("confirmer-command", data)
             })
             listcart.append(liSend)
 

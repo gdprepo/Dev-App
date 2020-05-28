@@ -22,38 +22,55 @@
 
     const categoryFilter = []
 
-    ipcRenderer.on(systemEvents.EVENT_FETCHED_PRODUCTS, (event, productList) => {
-        let list = $('#list')
-        list.empty();
-        productList.forEach(function(product){
-            let tableTr = $('<tr></tr>');
-            list.append(tableTr)
-            let tdTitle = $('<td scope=row></td>');
-            tdTitle.append(product.title + ' ' + product.prix + ' €')
-            tableTr.append(tdTitle)
-            let tdDescription = $('<td scope=row></td>');
-            tdDescription.append(product.description)
-            tableTr.append(tdDescription)
-            let tdImage = $('<td scope=row></td>');
-            tdImage.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgProduct" src="' + product.image + '"></img>' + '</a>')
-            tableTr.append(tdImage)
-            let button = $('<td scope=row></td>');
-            button.append('<button type="button" class="btn btn-primary">Ajouter</button>')
-            button.click( function () {
-                ipcRenderer.send(displayEvents.EVENT_PRODUCT_ADDED_TO_CART, product)
-            })
-            tableTr.append(button)
-        })
-
-    });
-
-    ipcRenderer.on(systemEvents.EVENT_FETCHED_CATEGORIES, (event, categoryList) => {
-        let list = $('#list-category')
+    function setUrl()
+    {
         var nom = window.location.pathname;
         nom = nom.split("/");
         nom = nom[nom.length - 1];
         nom = nom.substr(0, nom.lastIndexOf("."));
         nom = nom.replace(new RegExp("(%20|_|-)", "g"), "");
+
+        return nom
+    }
+
+    ipcRenderer.on(systemEvents.EVENT_FETCHED_PRODUCTS, (event, productList) => {
+        let list = $('#list')
+        list.empty();
+        var nom = setUrl()
+
+        if (nom == "products")
+            productList.forEach(function(product){
+                let tableTr = $('<tr></tr>');
+                list.append(tableTr)
+                let tdTitle = $('<td scope=row></td>');
+                tdTitle.append(product.title + ' ' + product.prix + ' €')
+                tableTr.append(tdTitle)
+                let tdDescription = $('<td scope=row></td>');
+                tdDescription.append(product.description)
+                tableTr.append(tdDescription)
+                let tdImage = $('<td scope=row></td>');
+                tdImage.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgProduct" src="' + product.image + '"></img>' + '</a>')
+                tableTr.append(tdImage)
+
+                let element = document.getElementById("add_product")
+                if (localStorage.getItem('token')) {
+                    let button = $('<td scope=row></td>');
+                    button.append('<button type="button" class="btn btn-primary">Ajouter</button>')
+                    button.click( function () {
+                        ipcRenderer.send(displayEvents.EVENT_PRODUCT_ADDED_TO_CART, product)
+                    })
+                    tableTr.append(button)
+                    element.style.display = "block"
+                } else {
+                    element.style.display = "none"
+                }
+            })
+
+    });
+
+    ipcRenderer.on(systemEvents.EVENT_FETCHED_CATEGORIES, (event, categoryList) => {
+        let list = $('#list-category')
+        var nom = setUrl()
 
         if (nom != "productshomme" && nom != "productsfemme") {
             categoryList.forEach(function(category){
