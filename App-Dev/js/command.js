@@ -117,6 +117,7 @@
                     total : total,
                 }
                 ipcRenderer.send("confirmer-command", data)
+                document.location.reload(true);
             })
             listcart.append(liSend)
 
