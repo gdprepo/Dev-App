@@ -191,7 +191,7 @@ ipcMain.on('send-cart', (event, data) =>{
   data.token = appState.token
   axios.post('http://localhost:8000/api/validate-command', data)
   .then(function (response) {
-    console.log(response.data)
+   // console.log(response.data)
     appState.cart = { product : [] }
     appState.win.webContents.send(systemEvents.EVENT_CART_UPDATED, appState.cart);
   });
