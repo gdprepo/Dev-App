@@ -102,6 +102,11 @@
         ipcRenderer.send(displayEvents.EVENT_SETUP, {token:localStorage.getItem("token"), user:JSON.parse(localStorage.getItem("user"))})
     }
 
+    var nom = setUrl()
+    if (!localStorage.getItem("token") && nom == "command") {
+        window.location.href = "./index.html";
+    }
+
     ipcRenderer.on(systemEvents.EVENT_USER_AUTHENTIFY, (event, userObject) => {
         localStorage.setItem("token", userObject.token);
         localStorage.setItem("user", JSON.stringify(userObject.user));

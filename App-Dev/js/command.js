@@ -43,7 +43,7 @@
             let total = 0
 
             let row = createRowForCommand(command)
-            console.log(command.products)
+
             command.products.forEach(function(product) {
                 let productRow = createRowForProduct(product)
                 productRows.push(productRow)
