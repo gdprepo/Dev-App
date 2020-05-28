@@ -121,40 +121,6 @@
         localStorage.setItem("cart", JSON.stringify(cart));
     });
 
-    // displayCart()
-
-    // function displayCart() {
-    //     let listcart = $('#cart')
-    //     listcart.empty();
-
-    //     let cart = JSON.parse(localStorage.getItem("cart"))
-    //     console.log(cart.product.length)
-    //     if (cart.product.length > 0) {
-    //         cart.product.forEach(function(product) {
-
-    //             let liProduct = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-    //             liProduct.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgCart" src="'+ product.image  +'"></img>' + '</a>')
-    //             liProduct.append(product.title + " " + product.prix + " €")
-    //             listcart.append(liProduct)
-    //             let button = $('<button type="button" class="btn btn-primary btn-cart">Supprimer</button>');
-    //             button.click( function () {
-    //                 ipcRenderer.send("remove-product-cart", product)
-    //             })
-    //             liProduct.append(button)
-    //             //listcart.append(listcart)
-    //         })
-    //         let liSend = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-    //         let btnSendCart = $('<button type="button" class="btn btn-primary">Enregistrer</button>');
-    //         btnSendCart.click( function () {
-    //             ipcRenderer.send("send-cart", cart);
-    //         })
-    //         listcart.append(liSend)
-
-    //         liSend.append(btnSendCart)
-    //     }
-
-    // }
-
     if (localStorage.getItem("user")) {
         let user = JSON.parse(localStorage.getItem("user"))
         let mailProfil = $('#profilEmail')
@@ -179,20 +145,6 @@
 
         }
     })
-
-    // let btnLogin = $('#loginbtn')
-
-    // btnLogin.click( function () {
-
-    //     var data = {
-    //         mail : $('#inputmail').val(),
-    //         password : $('#inputpassword').val(),
-    //     }
-
-    //     console.log(data)
-        
-    //     ipcRenderer.send("login-param", data);
-    // }) 
 
     let logout = $('#logout')
     

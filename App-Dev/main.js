@@ -148,7 +148,6 @@ ipcMain.on('register-param', (event, data)=>{
 
   axios.get('http://localhost:8000/api/register', {params: data})
   .then(function (response) {
-    console.log(response.data)
     if (response.data.success) {
 
 
@@ -164,7 +163,6 @@ ipcMain.on('confirmer-command', (event, data)=>{
 
   axios.post('http://localhost:8000/api/confirmer-command', data)
   .then(function (response) {
-   console.log(response.data)
     if (response.data.success) {
       let check = response.data.success
 
@@ -179,7 +177,6 @@ ipcMain.on('contact-param', (event, data)=>{
 
   axios.post('http://localhost:8000/api/contact', data)
   .then(function (response) {
-   console.log(response.data)
     if (response.data.success) {
       let check = response.data.success
 
@@ -194,7 +191,7 @@ ipcMain.on('send-cart', (event, data) =>{
   data.token = appState.token
   axios.post('http://localhost:8000/api/validate-command', data)
   .then(function (response) {
-    console.log(response)
+    console.log(response.data)
     appState.cart = { product : [] }
     appState.win.webContents.send(systemEvents.EVENT_CART_UPDATED, appState.cart);
   });

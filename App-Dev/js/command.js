@@ -43,6 +43,7 @@
             let total = 0
 
             let row = createRowForCommand(command)
+            console.log(command.products)
             command.products.forEach(function(product) {
                 let productRow = createRowForProduct(product)
                 productRows.push(productRow)
@@ -58,26 +59,11 @@
             liPrix.append( 'Le prix de total de votre commande est de : ' + total + '€')
             rows.push(liPrix)
         })
-        // let confirmer = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-        // let btnconfirmer = $('<button style="width:100%" type="button" class="btn btn-primary">Confirmer</button>');
-        // btnconfirmer.click( function () {
-        //     var data = {
-        //         token : localStorage.getItem('token'),
-        //         total : total,
-        //     }
-        //     ipcRenderer.send("confirmer-command", data)
-        // })
-        // confirmer.append(btnconfirmer)
-        // rows.push(confirmer)
 
         let list = $('#list-command')
         refreshList(list, rows);
 
     });
-
-    // if (localStorage.getItem("cart")) {
-    //     ipcRenderer.send("init-cart", JSON.parse(localStorage.getItem("cart")))
-    // }
     
     ipcRenderer.on("update-cart", (event, cart) => {
         localStorage.setItem("cart", JSON.stringify(cart));
