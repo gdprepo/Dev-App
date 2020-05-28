@@ -52,12 +52,20 @@
                     let tdImage = $('<td scope=row></td>');
                     tdImage.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgProduct" src="' + product.image + '"></img>' + '</a>')
                     tableTr.append(tdImage)
-                    let button = $('<td scope=row></td>');
-                    button.append('<button type="button" class="btn btn-primary">Ajouter</button>')
-                    button.click( function () {
-                        ipcRenderer.send("add-product-to-cart", product)
-                    })
-                    tableTr.append(button)
+
+                    let element = document.getElementById("add_product")
+                    if (localStorage.getItem('token')) {
+                        let button = $('<td scope=row></td>');
+                        button.append('<button type="button" class="btn btn-primary">Ajouter</button>')
+                        button.click( function () {
+                            ipcRenderer.send("add-product-to-cart", product)
+                        })
+                        tableTr.append(button)
+                        element.style.display = "block"
+                    } else {
+                        element.style.display = "none"
+                    }
+
                 }
 
             })
