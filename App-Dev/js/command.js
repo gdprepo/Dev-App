@@ -10,8 +10,8 @@
         let li = $('<li class="list-group-item"></li>');
 
         const liData = [
-            '<p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name +'</p>',
-            '<h6 class="font-weight-light text-right">' + command.date + '</h6>',
+            '<div style="display: inline"><p class="font-weight-bold blockquote text-center"> Commande n°'+ command.id + ' ' +command.status+' pour '+command.user.name +'</p>',
+            '<h6 class="font-weight-light text-right">' + command.date + '</h6></div>',
         ]
         refreshList(li, liData)
         
@@ -25,7 +25,7 @@
 
         const liData = [
             product.title + " " + product.prix + " €",
-            '<a href="./product/' + product.id +'_product.html">' + '<img class="imgCommand" src="'+ product.image  +'"></img>' + '</a>',
+            '<a>' + '<img class="imgCommand" src="'+ product.image  +'"></img>' + '</a>',
         ]
 
         refreshList(liProduct, liData)
@@ -33,6 +33,15 @@
 
         return liData
     }
+
+    function prixCommandList(total)
+    {
+        let liPrix = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
+        liPrix.append( 'Le prix de total de votre commande est de : ' + total + '€')
+
+        return liPrix
+    }
+    
 
     ipcRenderer.on("got-command-list", (event, commandList) => {
         let rows = []
@@ -55,8 +64,8 @@
 
             row.append(ulProduct)
             rows.push(row)
-            let liPrix = $('<li class="list-group-item list-group-item-action list-group-item-light"></li>')
-            liPrix.append( 'Le prix de total de votre commande est de : ' + total + '€')
+
+            let liPrix = prixCommandList(total)
             rows.push(liPrix)
         })
 

@@ -33,38 +33,56 @@
         return nom
     }
 
+    function createTdproduct(product)
+    {
+        let tr = $('<tr scope=row></tr>');
+
+        const tdData = [
+            '<td>' + product.title + ' ' + product.prix + ' €' + '</td>',
+            '<td>' + product.description + '</td>',
+            '<td>' + '<a>' + '<img class="imgProduct" src="' + product.image + '"></img>' + '</a>' + '</td>',
+        ]
+
+        refreshList(tr, tdData)
+        
+        return tr
+    }
+
     ipcRenderer.on(systemEvents.EVENT_FETCHED_PRODUCTS, (event, productList) => {
         let list = $('#list')
         list.empty();
         var nom = setUrl()
+        let buttons = []
+        let rows = []
 
         if (nom == "products")
             productList.forEach(function(product){
-                let tableTr = $('<tr></tr>');
-                list.append(tableTr)
-                let tdTitle = $('<td scope=row></td>');
-                tdTitle.append(product.title + ' ' + product.prix + ' €')
-                tableTr.append(tdTitle)
-                let tdDescription = $('<td scope=row></td>');
-                tdDescription.append(product.description)
-                tableTr.append(tdDescription)
-                let tdImage = $('<td scope=row></td>');
-                tdImage.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgProduct" src="' + product.image + '"></img>' + '</a>')
-                tableTr.append(tdImage)
-
-                let element = document.getElementById("add_product")
-                if (localStorage.getItem('token')) {
-                    let button = $('<td scope=row></td>');
-                    button.append('<button type="button" class="btn btn-primary">Ajouter</button>')
-                    button.click( function () {
+   
+                let td = createTdproduct(product)
+                if (localStorage.getItem('token')) {    
+                    const tdButton = $('<td id="add_product"><button type="button" class="btn btn-primary">Ajouter</button></td>')
+                    td.append(tdButton)
+                    const btnClick = function () {
                         ipcRenderer.send(displayEvents.EVENT_PRODUCT_ADDED_TO_CART, product)
-                    })
-                    tableTr.append(button)
-                    element.style.display = "block"
-                } else {
-                    element.style.display = "none"
+                    }
+                    buttons.push({tdButton: tdButton, btnClick: btnClick})
                 }
+                rows.push(td)
+
             })
+            refreshList(list, rows)
+            if (localStorage.getItem('token')) {    
+                buttons.forEach(function (button){
+                    button.tdButton.click(button.btnClick)
+                })
+            }
+            let element = document.getElementById("add_product")
+            if (localStorage.getItem('token')) {
+                element.style.display = "block"
+            } else {
+                element.style.display = "none"
+            }
+
 
     });
 

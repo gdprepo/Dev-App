@@ -50,7 +50,7 @@
                     tdDescription.append(product.description)
                     tableTr.append(tdDescription)
                     let tdImage = $('<td scope=row></td>');
-                    tdImage.append('<a href="./product/' + product.id +'_product.html">' + '<img class="imgProduct" src="' + product.image + '"></img>' + '</a>')
+                    tdImage.append('<a>' + '<img class="imgProduct" src="' + product.image + '"></img>' + '</a>')
                     tableTr.append(tdImage)
 
                     let element = document.getElementById("add_product")
